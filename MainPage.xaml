@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ToDoList.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ToDoList">
+
+<VerticalStackLayout Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+
+    <VerticalStackLayout Padding="10" Spacing="10" BackgroundColor="White" Margin="0,0,0,10">
+
+        <Entry x:Name="titleEntry"
+               Placeholder="Title"
+               PlaceholderColor="Gray"
+               TextColor="Black"
+               MaxLength="50"/>
+
+        <Editor x:Name="detailsEditor"
+                Placeholder="Details"
+                PlaceholderColor="Gray"
+                TextColor="Black"
+                HeightRequest="100"/>
+
+        <Button x:Name="addBtn"
+                Text="Add"
+                BackgroundColor="LightBlue"
+                Clicked="AddToDoItem"/>
+
+        <Button x:Name="editBtn"
+                IsVisible="False"
+                Text="Edit"
+                BackgroundColor="LightGray"
+                Clicked="EditToDoItem"/>
+
+        <Button x:Name="cancelBtn"
+                IsVisible="False"
+                Text="Cancel Edit"
+                BackgroundColor="LightCoral"
+                Clicked="CancelEdit"/>
+    </VerticalStackLayout>
+
+    <ListView x:Name="todoLV"
+              ItemSelected="TodoLV_OnItemSelected"
+              ItemTapped="todoLV_ItemTapped">
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Margin="10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               FontSize="16"
+                               Text="{Binding title}"/>
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               FontSize="14"
+                               Text="{Binding detail}"/>
+
+                        <Button Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="1"
+                                Text="Done"
+                                BackgroundColor="LightCoral"
+                                ClassId="{Binding id}"
+                                Clicked="DeleteToDoItem"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+
+</VerticalStackLayout>
+</ContentPage>
